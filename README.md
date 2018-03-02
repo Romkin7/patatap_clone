@@ -10,5 +10,9 @@ Instead for every new circle, a new random color is generated with random positi
 Secondly on every key press one of predefined sounds is randomly picked and played.
 
 Lastly I'm resetting circles final destination every two seconds, so they end up moving nicely around whole screen. :-)
-project can be sawn online by this address:
+project can be sawn online by visiting this address:
 https://hungry-spence-faca80.netlify.com/
+
+Happy coding guys
+
+Cheers, Roman T
