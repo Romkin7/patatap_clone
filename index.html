@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="author" content="Roman Tuomisto">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Patatap Clone || By Roman T</title>
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<script type="text/javascript" src="./libs/paper/dist/paper-full.js"></script>
+	<script type="text/javascript" src="./libs/howler/dist/howler.min.js"></script>
+	<script type="text/paperscript" canvas="myCanvas">
+		var sound = new Howl({
+      		src: ['media/rave_digger.mp3'],
+      		sprite: {
+    			one: [0, 100],
+    			two: [100, 300],
+   			 	three: [500, 600],
+   			 	four: [800, 900],
+   			 	five: [2200, 2400]
+  			},
+  			volume: 0.5
+   	 	});
+   	 	function setPlayback(){
+   	 		var sounds = ["one", "two", "three", "four", "five"];
+    		return sounds[Math.floor(Math.random() * sounds.length)];
+   	 	};
+		function getRandomColor() {
+  			var letters = '0123456789ABCDEF';
+  			var color = '#';
+  			for (var i = 0; i < 6; i++) {
+    			color += letters[Math.floor(Math.random() * 16)];
+  			}
+  			return color;
+		};
+		var circles = [];
+		function onKeyDown(event) {
+		sound.play(setPlayback());
+		var maxPoint = new Point(view.size.width, view.size.height);
+			var randomPoint = Point.random();
+			var point = maxPoint * randomPoint;
+			var circle = new Path.Circle(point, 500);
+			circle.fillColor = getRandomColor();
+			circles.push(circle);
+		};
+		function onFrame(event) {
+			for(var i = 0; i < circles.length; i++) {
+				circles[i].fillColor.hue += 1;
+				circles[i].scale(.9);
+				if(circles[i].area < 1){
+     				circles[i].remove(); // remove the circle from the canvas
+      				circles.splice(i, 1); // remove the circle from the array
+      				i--; // decrement i so that the loop doesn't skip a circle because of .splice()
+    			}
+			}
+		};
+	</script>
+</head>
+<body>
+	<canvas id="myCanvas" resize></canvas>
+	<script type="text/javascript" src="./js/app.js"></script>
+</body>
+</html>
