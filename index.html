@@ -43,12 +43,15 @@
 			circle.fillColor = getRandomColor();
 			circles.push(circle);
 		};
+		var destination = Point.random() * view.size;
+		var resetDestination = setInterval(setRandomPoint, 2000);
+		function setRandomPoint(){
+			destination = Point.random() * view.size;
+		};
 		function onFrame(event) {
 			for(var i = 0; i < circles.length; i++) {
 				circles[i].fillColor.hue += 1;
-				var destination = Point.random() * view.size;
 				var vector = destination - circles[i].position;
-	
 				// We add 1/30th of the vector to the position property
 				// of the text item, to move it in the direction of the
 				// destination point:
